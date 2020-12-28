@@ -21,3 +21,5 @@ kubeconfig_*
 **/config/generated/*
 **/config/demo.yaml
 **/config/lab.yaml
+
+known_hosts
