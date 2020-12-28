@@ -1,4 +1,3 @@
-
 variable "git_url" {
   description = "The URL of the git repository"
   type        = string
@@ -106,7 +105,7 @@ variable "flux_ssh_scan_url" {
 
 variable "output_manifests" {
   description = "A flag whether to include the manifests genereated by Flux in the output"
-  type = bool
+  type        = bool
 
   default = false
 }

@@ -12,11 +12,11 @@ output "namespace" {
 
 output "flux_private_key" {
   sensitive = true
-  value = var.flux_auth_type == "ssh" ? tls_private_key.ssh.0.private_key_pem : ""
+  value     = var.flux_auth_type == "ssh" ? tls_private_key.ssh.0.private_key_pem : ""
 }
 
 output "flux_public_key" {
   sensitive = true
-  value = var.flux_auth_type == "ssh" ? tls_private_key.ssh.0.public_key_openssh : ""
+  value     = var.flux_auth_type == "ssh" ? tls_private_key.ssh.0.public_key_openssh : ""
 }
 

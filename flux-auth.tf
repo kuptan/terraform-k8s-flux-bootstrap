@@ -17,7 +17,7 @@ data "local_file" "known_hosts" {
   depends_on = [null_resource.ssh_scan]
   count      = var.flux_auth_type == "ssh" ? 1 : 0
 
-  filename   = "${path.module}/known_hosts"
+  filename = "${path.module}/known_hosts"
 }
 
 resource "kubernetes_secret" "basic" {

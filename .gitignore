@@ -2,6 +2,7 @@ bin/*
 **/*.tfstate*
 **/*.tfstate.backup
 **/.terraform/*
+**/.terraform.lock.*
 **/*.test.tfvars
 
 .DS_Store
