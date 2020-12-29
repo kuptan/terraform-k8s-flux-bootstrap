@@ -7,7 +7,7 @@ Check the module documentation [here](https://registry.terraform.io/modules/kube
 ## Usage
 
 ```terraform
-module "k8s-infra" {
+module "flux-bootstrap" {
   source  = "kube-champ/flux-bootstrap/k8s"
   version = "0.0.x" # <-- change version  
   ...
