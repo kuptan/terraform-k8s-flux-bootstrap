@@ -48,9 +48,9 @@ workflows:
   build_and_test:
     jobs:
       - build
-      - plan:
-          requires:
-            - build
-          context:
-            - azure-credentials
-            - slack-notify
+      # - plan:
+      #     requires:
+      #       - build
+      #     context:
+      #       - azure-credentials
+      #       - slack-notify

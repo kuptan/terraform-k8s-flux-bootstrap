@@ -10,7 +10,7 @@ provider "kubernetes" {
 }
 
 module "k8s-flux" {
-  source = "../../../terraform-k8s-flux-bootstrap"
+  source = "kube-champ/flux-bootstrap/k8s"
 
   flux_ssh_scan_url = var.flux_ssh_scan_url
   git_url           = var.git_url

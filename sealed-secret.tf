@@ -28,7 +28,7 @@ resource "tls_self_signed_cert" "sealed_secret_cert" {
 
 resource "kubernetes_secret" "sealed_secrets_key" {
   depends_on = [kubernetes_namespace.flux_system]
-  count = var.sealed_secrets.genereate_key_cert || (var.sealed_secrets.private_key != "" && var.sealed_secrets.private_cert != "") ? 1 : 0
+  count      = var.sealed_secrets.genereate_key_cert || (var.sealed_secrets.private_key != "" && var.sealed_secrets.private_cert != "") ? 1 : 0
 
   metadata {
     name      = "sealed-secret-flux-key"
@@ -48,7 +48,7 @@ resource "kubernetes_secret" "sealed_secrets_key" {
 
 resource "helm_release" "sealed_secrets" {
   depends_on = [kubernetes_namespace.flux_system]
-  
+
   name      = "sealed-secrets"
   namespace = var.namespace
 
