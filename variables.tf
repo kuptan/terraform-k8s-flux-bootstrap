@@ -103,6 +103,25 @@ variable "flux_ssh_scan_url" {
   default = ""
 }
 
+variable "sealed_secrets" {
+  description = "The sealed secret default chart version and docker image tag. (if genereate_key_cert is false and private_key and private_cert are not provided, no custom key will be generated)"
+  type = object({
+    genereate_key_cert : bool,
+    private_key : string,
+    private_cert : string,
+    chart_version : string,
+    docker_image_tag : string
+  })
+
+  default = {
+    genereate_key_cert = true
+    private_key        = ""
+    private_cert       = ""
+    chart_version      = "1.12.2"
+    docker_image_tag   = "v0.13.1"
+  }
+}
+
 variable "output_manifests" {
   description = "A flag whether to include the manifests genereated by Flux in the output"
   type        = bool

@@ -8,7 +8,7 @@ variable "git_url" {
 variable "flux_target_path" {
   description = "The path of the directory in the Git repository on which Flux will sync"
   type        = string
-  
+
   default = "clusters"
 }
 
