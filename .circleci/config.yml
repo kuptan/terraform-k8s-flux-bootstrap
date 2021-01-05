@@ -1,0 +1,56 @@
+## block-kit-builder: https://app.slack.com/block-kit-builder
+
+version: 2.1
+
+orbs:
+  slack: circleci/slack@4.2
+# Define the jobs we want to run for this project
+jobs:
+  build:
+    docker:
+      - image: hashicorp/terraform:0.14.3
+    steps:
+      - checkout
+      - run:
+          name: terraform init & validate
+          command: |
+            terraform init examples/cluster-bootstrap
+            terraform validate examples/cluster-bootstrap
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+  plan:
+    docker:
+      - image: hashicorp/terraform:0.14.3
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: "install packages"
+          command: |
+            apk add curl jq
+      - run:
+          name: terraform plan
+          command: |
+            terraform plan examples/cluster-bootstrap
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
+          mentions: "@Ibraheem Al Saady"
+      # When there is a successful deployment, send a notification with a different template.
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1
+
+# Orchestrate our job run sequence
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - plan:
+          requires:
+            - build
+          context:
+            - azure-credentials
+            - slack-notify
