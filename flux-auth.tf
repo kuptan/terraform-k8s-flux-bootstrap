@@ -9,7 +9,7 @@ resource "null_resource" "ssh_scan" {
   count = var.flux_auth_type == "ssh" ? 1 : 0
 
   provisioner "local-exec" {
-    command = "ssh-keyscan ${var.flux_ssh_scan_url} > ${path.module}/known_hosts"
+    command = "ssh-keyscan ${var.flux_ssh_scan_url} > /tmp/known_hosts"
   }
 }
 
@@ -17,7 +17,7 @@ data "local_file" "known_hosts" {
   depends_on = [null_resource.ssh_scan]
   count      = var.flux_auth_type == "ssh" ? 1 : 0
 
-  filename = "${path.module}/known_hosts"
+  filename = "/tmp/known_hosts"
 }
 
 resource "kubernetes_secret" "basic" {
