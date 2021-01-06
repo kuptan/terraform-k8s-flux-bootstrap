@@ -8,6 +8,10 @@ resource "tls_private_key" "ssh" {
 resource "null_resource" "ssh_scan" {
   count = var.flux_auth_type == "ssh" ? 1 : 0
 
+  triggers = {
+    timestamp = timestamp()
+  }
+
   provisioner "local-exec" {
     command = "ssh-keyscan ${var.flux_ssh_scan_url} > /tmp/known_hosts"
   }
