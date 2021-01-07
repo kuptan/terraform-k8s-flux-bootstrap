@@ -49,7 +49,7 @@ resource "kubernetes_secret" "sealed_secrets_key" {
 resource "helm_release" "sealed_secrets" {
   depends_on = [
     kubernetes_namespace.flux_system,
-    kubectl_manifest
+    kubectl_manifest.apply
   ]
 
   name      = "sealed-secrets"
