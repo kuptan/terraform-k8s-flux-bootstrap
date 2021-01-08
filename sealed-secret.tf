@@ -47,13 +47,8 @@ resource "kubernetes_secret" "sealed_secrets_key" {
 }
 
 resource "helm_release" "sealed_secrets" {
-  depends_on = [
-    kubernetes_namespace.flux_system,
-    kubectl_manifest.apply
-  ]
-
   name      = "sealed-secrets"
-  namespace = var.namespace
+  namespace = kubernetes_namespace.flux_system.metadata.0.name
 
   repository = "https://charts.helm.sh/stable"
   chart      = "sealed-secrets"
