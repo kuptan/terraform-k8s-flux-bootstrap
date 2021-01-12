@@ -85,6 +85,21 @@ variable "flux_auth_type" {
   default = "ssh"
 }
 
+variable "flux_ssh_keys" {
+  description = "The ssh keys for flux. (Active when flux_auth_type is ssh)"
+  type = object({
+    generate_key : bool,
+    private_key : string,
+    public_key : string,
+  })
+
+  default = {
+    generate_key = true
+    private_key  = ""
+    public_key   = ""
+  }
+}
+
 variable "flux_basic_auth" {
   description = "The basic auth credentials. Only needed when flux_auth_type is basic"
   sensitive   = true
@@ -104,9 +119,9 @@ variable "flux_ssh_scan_url" {
 }
 
 variable "sealed_secrets" {
-  description = "The sealed secret default chart version and docker image tag. (if genereate_key_cert is false and private_key and private_cert are not provided, no custom key will be generated)"
+  description = "The sealed secret default chart version and docker image tag. (if generate_key_cert is false and private_key and private_cert are not provided, no custom key will be generated)"
   type = object({
-    genereate_key_cert : bool,
+    generate_key_cert : bool,
     private_key : string,
     private_cert : string,
     chart_version : string,
@@ -114,11 +129,11 @@ variable "sealed_secrets" {
   })
 
   default = {
-    genereate_key_cert = true
-    private_key        = ""
-    private_cert       = ""
-    chart_version      = "1.12.2"
-    docker_image_tag   = "v0.13.1"
+    generate_key_cert = true
+    private_key       = ""
+    private_cert      = ""
+    chart_version     = "1.13.2"
+    docker_image_tag  = "v0.13.1"
   }
 }
 

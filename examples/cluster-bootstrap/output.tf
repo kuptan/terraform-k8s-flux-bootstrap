@@ -1,6 +1,6 @@
-output "flux_public_key" {
+output "flux_generated_public_key" {
   sensitive = true
-  value     = module.k8s-flux.flux_public_key
+  value     = module.k8s-flux.flux_generated_public_key
 }
 
 output "sealed_secrets_generated_cert" {
