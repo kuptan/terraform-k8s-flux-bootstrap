@@ -36,13 +36,6 @@ variable "flux_version" {
   default = "latest"
 }
 
-variable "flux_arch" {
-  description = "The arch of Flux (amd64, arm)"
-  type        = string
-
-  default = "amd64"
-}
-
 variable "flux_network_policy_enabled" {
   description = "A flag to enable/disable network policies"
   type        = bool

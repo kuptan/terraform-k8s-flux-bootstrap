@@ -3,7 +3,6 @@
 
 data "flux_install" "main" {
   target_path        = var.flux_target_path
-  arch               = var.flux_arch
   network_policy     = var.flux_network_policy_enabled
   version            = var.flux_version
   namespace          = var.namespace
