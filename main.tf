@@ -30,7 +30,8 @@ data "kubectl_file_documents" "sync" {
 
 resource "kubernetes_namespace" "flux_system" {
   metadata {
-    name = var.namespace
+    name   = var.namespace
+    labels = var.namespace_labels
   }
 
   lifecycle {

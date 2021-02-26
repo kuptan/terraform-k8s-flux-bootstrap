@@ -8,6 +8,13 @@ variable "flux_target_path" {
   type        = string
 }
 
+variable "namespace_labels" {
+  description = "kubernetes labels to be applied on the flux namespace"
+  type        = map(string)
+
+  default = {}
+}
+
 variable "namespace" {
   description = "The namespace on which Flux will be installed"
   type        = string
