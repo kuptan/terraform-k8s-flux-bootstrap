@@ -12,10 +12,14 @@ jobs:
     steps:
       - checkout
       - run:
-          name: terraform init & validate
+          name: Init
           command: |
-            terraform init examples/cluster-bootstrap
-            terraform validate examples/cluster-bootstrap
+            terraform init examples/basic
+      - run:
+          name: Validate
+          command: |
+            terraform fmt -check
+            terraform validate examples/basic
       - persist_to_workspace:
           root: .
           paths:
@@ -33,7 +37,7 @@ jobs:
       - run:
           name: terraform plan
           command: |
-            terraform plan examples/cluster-bootstrap
+            terraform plan examples/basic
       - slack/notify:
           event: fail
           template: basic_fail_1
@@ -45,7 +49,7 @@ jobs:
 
 # Orchestrate our job run sequence
 workflows:
-  build_and_test:
+  validate:
     jobs:
       - build
       # - plan:
