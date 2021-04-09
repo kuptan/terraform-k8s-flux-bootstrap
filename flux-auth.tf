@@ -1,6 +1,6 @@
 
 resource "tls_private_key" "ssh" {
-  count = var.flux_auth_type == "ssh" && var.flux_ssh_keys.generate_key ? 1 : 0
+  count = var.flux_auth_type == "ssh" && var.flux_ssh_key.auto_generate_key ? 1 : 0
 
   algorithm = "RSA"
   rsa_bits  = "2048"
@@ -50,8 +50,8 @@ resource "kubernetes_secret" "ssh" {
   }
 
   data = {
-    "identity"     = var.flux_auth_type == "ssh" && var.flux_ssh_keys.generate_key ? tls_private_key.ssh.0.private_key_pem : var.flux_ssh_keys.private_key
-    "identity.pub" = var.flux_auth_type == "ssh" && var.flux_ssh_keys.generate_key ? tls_private_key.ssh.0.public_key_openssh : var.flux_ssh_keys.public_key
+    "identity"     = var.flux_auth_type == "ssh" && var.flux_ssh_key.auto_generate_key ? tls_private_key.ssh.0.private_key_pem : var.flux_ssh_key.private_key
+    "identity.pub" = var.flux_auth_type == "ssh" && var.flux_ssh_key.auto_generate_key ? tls_private_key.ssh.0.public_key_openssh : var.flux_ssh_key.public_key
     "known_hosts"  = data.local_file.known_hosts.0.content
   }
 }
