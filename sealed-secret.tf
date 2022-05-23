@@ -75,4 +75,3 @@ resource "helm_release" "sealed_secrets" {
     }
   }
 }
-
