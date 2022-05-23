@@ -58,7 +58,7 @@ resource "helm_release" "sealed_secrets" {
 
   set {
     name  = "image.repository"
-    value = "quay.io/bitnami/sealed-secrets-controller"
+    value = "bitnami/sealed-secrets-controller"
   }
 
   set {
